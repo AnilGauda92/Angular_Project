@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="row">
+        <div class="form-bg">
+            <div class="col-sm-8">
+                <form class="mt-3" #myForm="ngForm" (ngSubmit)="sumbitMyForm(myForm)">
+                    <div class="form-group">
+                        <label for="firstname">FirstName</label>
+                        <input type="text" name="firstname" #fname="ngModel" [(ngModel)]="user.firstname" class="form-control" required minlength="5"/>
+                        <div>
+                            <span class="text-danger" *ngIf="fname.hasError('required') && fname.touched">Please fill the firstname</span>
+                            <span class="text-danger" *ngIf="fname.hasError('minlength') && fname.touched">First name should be minimum 5 Chars</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">LastName</label>
+                        <input type="text" name="lastname" class="form-control" #lname="ngModel" [(ngModel)]="user.lastname" required/>
+                    </div>
+                    <div>
+                        <span class="text-danger" *ngIf="lname.hasError('required') && lname.touched">Please fill the lastname</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email ID</label>
+                        <input type="text" class="form-control" #email="ngModel" name="email" [(ngModel)]="user.email" required/>
+                    </div>
+                    <div>
+                        <span class="text-danger" *ngIf="email.hasError('required') && email.touched">Please fill the email</span>
+                    </div>
+                    <div class="form-group">
+                        <fieldset ngModelGroup="address">
+                            <p>Street <input type="text" name="street" #street="ngModel" class="form-control" ngModel required></p>
+                            <div>
+                                <span class="text-danger" *ngIf="street.hasError('required') && street.touched">Please fill the street</span>
+                            </div>
+                            <p>City <input type="text" name="city" #city="ngModel" class="form-control" ngModel required></p>
+                            <div>
+                                <span class="text-danger" *ngIf="city.hasError('required') && city.touched">Please fill the City</span>
+                            </div>
+                            <p>PinCode <input type="text" name="pin" #pin="ngModel" class="form-control" ngModel required></p>
+                            <div>
+                                <span class="text-danger" *ngIf="pin.hasError('required') && pin.touched">Please fill the Pincode</span>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <label for="gender">Gender</label> &nbsp;
+                        <input type="radio" name="gender" [(ngModel)]="user.gender" #gender="ngModel" value="male"required > &nbsp;Male
+                        <input type="radio" name="gender" [(ngModel)]="user.gender" value="female">&nbsp; female
+                        <div class="text-danger" *ngIf="gender.hasError('required')">Please select gender </div>
+                    </div>
+                    <div>
+                         <input type="checkbox" name="isAccept"  #check="ngModel" ngModel required>Accept Terms & Conditions 
+                        <div class="text-danger" *ngIf="check.hasError('required')">Please select the check box</div>
+                    </div>
+                    <button class="btn btn-primary w-50" type="submit">Submit</button>
+                    <button class="btn btn-secondary ms-1 w-25" type="reset">Reset</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{myForm.value | json}}

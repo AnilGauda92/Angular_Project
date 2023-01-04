@@ -1,0 +1,97 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            <h3 class="bg-primary text-white text-center mt-3">Employee List</h3>
+            <table class="table table-bordered table-striped mt-3">
+                <thead>
+                    <tr>
+                        <td>Sr No.</td>
+                        <td>ID</td>
+                        <td>Name</td>
+                        <td>Salary</td>
+                        <td>City</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let emp of employeesData; let i=index">
+                        <td>{{i+1}}</td>
+                        <td>{{emp.id}}</td>
+                        <td>{{emp.name}}</td>
+                        <td>{{emp.sal}}</td>
+                        <td>{{emp.city}}</td>
+                        <td>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#viewEmployeeData" (click)="ViewData(emp.id,emp.name,emp.sal,emp.city)">View</button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="viewEmployeeData" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Employee Details</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="mb-3 mt-3">
+                                                    <label class="form-label">ID</label>
+                                                    <input type="text" class="form-control" [(ngModel)]="Employeeid1" name="Employeeid">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Name</label>
+                                                    <input type="text" class="form-control" [(ngModel)]="Employeename1" name="Employeename">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Salary</label>
+                                                    <input type="text" class="form-control" [(ngModel)]="Employeesal1" name="Employeesal">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">City</label>
+                                                    <input type="text" class="form-control" [(ngModel)]="Employeecity1" name="Employeecity">
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-danger ms-2" (click)="deleteData(emp.id)">Delete</button>
+                            <button class="btn btn-secondary ms-2"
+                                (click)="editData(emp.id,emp.name,emp.sal,emp.city)">Edit</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-4">
+            <h3 class="bg-primary text-white text-center mt-3">Add Employees</h3>
+            <form>
+                <div class="mb-3 mt-3">
+                    <label class="form-label">ID</label>
+                    <input type="text" class="form-control" [(ngModel)]="Employeeid" name="Employeeid">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="Employeename" name="Employeename">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Salary</label>
+                    <input type="text" class="form-control" [(ngModel)]="Employeesal" name="Employeesal">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">City</label>
+                    <input type="text" class="form-control" [(ngModel)]="Employeecity" name="Employeecity">
+                </div>
+                <button type="submit" class="btn btn-primary" (click)="AddData()" [ngStyle]="{ display: IsAdd == true ? 'block' : 'none'}">Add</button>
+                <button type="submit" class="btn btn-primary" (click)="UpdateEmpData()" [ngStyle]="{ display: IsUpdate == true ? 'block' : 'none'}">Update</button>
+            </form>
+        </div>
+    </div>
+</div>
